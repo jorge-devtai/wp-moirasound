@@ -1,0 +1,16 @@
+---
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import FeaturedArtists from '@sections/home/FeaturedArtists.astro';
+import HomeHeader from '@sections/home/HomeHeader.astro';
+import Mision from '@sections/home/Mision.astro';
+
+const pageTitle = 'Moira Sound'
+
+---
+
+<BaseLayout  pageTitle = {pageTitle}>
+	<HomeHeader />
+	<Mision />
+	<FeaturedArtists />
+</BaseLayout>

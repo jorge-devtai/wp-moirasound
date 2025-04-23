@@ -1,0 +1,133 @@
+---
+import Buttons from "@components/Buttons.astro";
+
+const buttons = [
+    { label: "Descubre próximos eventos", type: "primary", href: "#" },
+];
+---
+
+<section>
+    <header class="orb">
+        <div class="header-content">
+            <h1>Impulsando el talento musical del futuro</h1>
+            <Buttons buttons={buttons} />
+        </div>
+        
+    </header>
+</section>
+
+<style>
+    section {
+        display: grid;
+        place-content: center;
+      
+    }
+
+    @property --angle {
+        syntax: "<angle>";
+        inherits: false;
+        initial-value: 0deg;
+    }
+
+    header {
+        --bg: var(--color-moira-contrast);
+        --c1: var(--color-moira-contrast2);
+        --c2: var(--color-moira-contrast);
+        --c3: var(--color-moira-accent);
+
+        position: relative;
+        display: grid;
+        place-items: center;
+        background-color: var(--bg);
+    }
+
+    .header-content {
+        display: grid;
+        z-index: 99;
+        color: var(--color-moira-base);
+        gap:32px;
+    }
+
+    .orb {
+        grid-template-areas: "stack";
+        inline-size: 100vw;
+        block-size: 95vh;
+        aspect-ratio: 1;
+        overflow: hidden;
+
+
+        &::before,
+        &::after {
+            position: absolute;
+            content: "";
+            grid-area: stack;
+            width: 100%;
+            height: 100%;
+            transform: translateZ(0);
+          
+        }
+
+        &::before {
+            
+            background: conic-gradient(
+                    from calc(var(--angle) * 2) at 25% 70%,
+                    var(--c3),
+                    transparent 20% 80%,
+                    var(--c3)
+                ),
+                conic-gradient(
+                    from calc(var(--angle) * 2) at 45% 75%,
+                    var(--c2),
+                    transparent 30% 60%,
+                    var(--c2)
+                ),
+                conic-gradient(
+                    from calc(var(--angle) * -3) at 80% 20%,
+                    var(--c1),
+                    transparent 40% 60%,
+                    var(--c1)
+                ),
+                conic-gradient(
+                    from calc(var(--angle) * 2) at 15% 5%,
+                    var(--c2),
+                    transparent 10% 90%,
+                    var(--c2)
+                ),
+                conic-gradient(
+                    from calc(var(--angle) * 1) at 20% 80%,
+                    var(--c1),
+                    transparent 10% 90%,
+                    var(--c1)
+                ),
+                conic-gradient(
+                    from calc(var(--angle) * -2) at 85% 10%,
+                    var(--c3),
+                    transparent 20% 80%,
+                    var(--c3)
+                );
+            box-shadow: inset var(--bg) 0 0 5vmin 1vmin;
+            filter: blur(3vmin) contrast(5);
+            animation: rotate 20s linear infinite;      
+
+        }
+
+        &::after {
+            --dot: 1.5px;
+            background-image: radial-gradient(
+                circle at center,
+                var(--bg) var(--dot),
+                transparent var(--dot)
+            );
+            background-size: calc(var(--dot) * 2) calc(var(--dot) * 2);
+            mask-image: radial-gradient(black 25%, transparent 75%);
+            backdrop-filter: blur(8vmin) contrast(10);
+            mix-blend-mode: normal;
+        }
+    }
+
+    @keyframes rotate {
+        to {
+            --angle: 360deg;
+        }
+    }
+</style>

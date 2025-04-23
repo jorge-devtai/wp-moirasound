@@ -1,0 +1,50 @@
+---
+const { buttons } = Astro.props;
+---
+
+<div class="btn-group">
+    {
+        buttons.map(({ label, type, href }: any) => (
+            <button data-type={type}>
+                <a href={href}>{label}</a>
+            </button>
+        ))
+    }
+</div>
+
+<style>
+    .btn-group {
+        display: flex;
+        place-content: center;
+        gap: 16px;
+        align-items: center;
+    }
+
+    button {
+        border: none;
+        border-radius: 50px;
+        padding: 8px 32px;
+        cursor: pointer;
+        
+        > a {
+        text-decoration: none;
+        color: var(--color-moira-contrast);
+        text-transform: uppercase;
+        font-weight: normal;
+    }
+
+    }
+
+    button[data-type="primary"] {
+        background-color: var(--color-moira-accent); 
+    }
+
+
+    button[data-type="secondary"] {
+        background-color: var(--color-moira-accent2);
+        > a {
+            color: var(--color-moira-base);
+        }
+        
+    }
+</style>

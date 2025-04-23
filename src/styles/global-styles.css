@@ -1,0 +1,120 @@
+:root {
+    --color-moira-base: #FDF7ED;
+    --color-moira-contrast: #073669;
+    --color-moira-contrast2: #F24607;
+    --color-moira-accent: #B1F250;
+    --color-moira-accent2: #C291F2;
+
+    --font-size-morira-x-large: clamp(2.813rem, 2.494rem + 1.59vw, 4rem);
+    --font-size-morira-large: clamp(2rem, 1.732rem + 1.34vw, 3rem);
+    --font-size-moira-medium: clamp(0.875rem, 0.808rem + 0.34vw, 1.125rem);
+
+    --space-inline-layout: clamp(1rem, -0.074rem + 5.37vw, 5rem);
+    --space-block-laytout: clamp(1.25rem, 0.243rem + 5.03vw, 5rem);
+}
+
+@font-face {
+    font-family: 'Geologica';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/geologica:vf@latest/latin-wght-normal.woff2) format('woff2-variations');
+    unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+
+
+
+@layer reset {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+    
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-moira-base);
+    }
+
+    h1, h2, h3, h4, h5, p {
+        font-family: 'Geologica';
+        font-weight: normal;
+
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    figure {
+        margin: 0;
+        padding: 0;
+        display: flex;
+
+        > img {
+            min-inline-size: 100%;
+            flex-grow: 1;
+            object-fit: cover;
+        }
+    }
+
+}
+
+@layer layout.base {  
+
+    h1 { 
+        font-size: var(--font-size-morira-x-large);
+        text-transform: uppercase;
+        text-align: center;
+        text-wrap: balance;
+    }
+
+    h2 {
+        font-size: var(--font-size-morira-large);
+        line-height: 1.1;
+        text-wrap: balance;
+
+    }
+
+    p {
+        font-size: var(--font-size-moira-medium);
+        text-wrap: pretty;
+        color: inherit;
+    };
+
+
+    menu {
+        font-family: 'Geologica';
+        list-style-type: none;
+        display: flex;
+    }
+
+    .grid {
+        --grid-max-column-count: attr(max-column-count type(<number>), 3);
+        --grid-min-column-size: attr(min-container-grid type(<length>), 150px);
+        --grid-gap: attr(grid-gap type(<length>), 1rem);
+      
+        /* calculations, do not touch */
+        --grid-column-size-calc: calc(
+          (100% - var(--grid-gap) * var(--grid-max-column-count)) /
+            var(--grid-max-column-count)
+        );
+        --grid-column-min-size-calc: min(
+          100%,
+          max(var(--grid-min-column-size), var(--grid-column-size-calc))
+        );
+      
+        display: grid;
+        gap: var(--grid-gap);
+      
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(var(--grid-column-min-size-calc), 1fr)
+        );
+      }
+}

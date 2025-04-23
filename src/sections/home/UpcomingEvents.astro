@@ -1,0 +1,17 @@
+---
+import Buttons from "@components/Buttons.astro";
+const buttons = [
+    { label: "Todos los eventos", type: "primary", href: "#" },
+];
+---
+<section>
+    <div 
+        class="grid"
+        max-column-count="3"
+        grid-gap="32px"
+        min-container-grid ="280px"
+    >
+        <h2>Artistas Destacados</h2>
+        <Buttons buttons={buttons}/>
+    </div>
+</section>

@@ -1,0 +1,55 @@
+---
+import Buttons from "@components/Buttons.astro";
+
+const buttons = [
+    { label: "Conoce nuestra misión", type: "secondary", href: "#" },
+];
+---
+
+<section>
+    <div
+        class="layout-container grid"
+        max-column-count="2"
+        grid-gap="2rem"
+        min-container-grid="200px"
+    >
+        <div>
+            <h2>Una plataforma dedicada a crear</h2>
+            <p>
+                Moira Sound difunde y potencia el talento emergente. Conectamos
+                artistas con oportunidades únicas y audiencias globales.
+            </p>
+            <Buttons buttons={buttons} />
+        </div>
+        <figure>
+            <img src="" alt="imagen de misión" />
+        </figure>
+    </div>
+</section>
+
+<style>
+    section {
+        color: var(--color-moira-contrast);
+        padding-inline: var(--space-inline-layout);
+        padding-block: var(--space-block-laytout);
+
+        & .layout-container {
+            max-inline-size: 1512px;
+            margin-inline: auto;
+
+            > div {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+
+                > :where(h2) {
+                    text-transform: uppercase;
+                }
+
+                > :is(.btn-group) {
+                    justify-content: start;
+                }
+            }
+        }
+    }
+</style>

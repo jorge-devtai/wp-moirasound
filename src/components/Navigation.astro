@@ -1,0 +1,46 @@
+---
+import Logo from '@assets/astro.svg'
+---
+<header>
+    <figure>
+        <img src={Logo.src} alt="Logotipo MoiraSound">
+    </figure>
+    <nav>
+        <menu>
+            <li><a href="">Sobre Nosotros</a></li>
+            <li><a href="">Artistas</a></li>
+            <li><a href="">Eventos</a></li>
+            <li><a href="">Contacto</a></li>
+        </menu>
+    </nav>
+</header>
+
+
+<style>
+    header {
+        display: flex;
+        background-color: var(--color-moira-contrast);
+        justify-content: space-between;
+        padding-inline: 0 2rem;
+
+        & nav {
+            display: grid;
+            place-content: center;
+
+            & menu {
+                display: flex;
+                font-family: 'Geologica';
+                list-style-type: none;
+                gap: 1rem;
+                 
+
+                & a {
+                color: var(--color-moira-base);
+                }
+            }
+
+           
+        }
+        
+    }
+</style>

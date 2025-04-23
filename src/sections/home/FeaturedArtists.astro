@@ -1,0 +1,141 @@
+---
+import Buttons from "@components/Buttons.astro";
+const buttons = [
+    { label: "Ver todos los artistas", type: "primary", href: "#" },
+];
+---
+<section>
+    <div 
+        class="grid"
+        max-column-count="2"
+        grid-gap="32px"
+        min-container-grid ="280px"
+    >
+        <h2>Artistas Destacados</h2>
+        <Buttons buttons={buttons}/>
+    </div>
+    <fieldset>
+        <label style="--_img: url(https://assets.codepen.io/2585/fiddle-leaf.jpeg)">          
+          <input type="radio" name="images" value="Fiddle Leaf">
+        </label>
+        <label style="--_img: url(https://assets.codepen.io/2585/pink-princess.jpeg)">
+          <input type="radio" name="images" value="Pink Princess">
+        </label>
+        <label style="--_img: url(https://assets.codepen.io/2585/kara-eads-zcVArTF8Frs-unsplash.jpg)">
+          <input type="radio" name="images" value="Monstera" checked>
+        </label>
+        <label style="--_img: url(https://assets.codepen.io/2585/pothos.jpeg)">
+          <input type="radio" name="images" value="Pothos">
+        </label>
+        <label style="--_img: url(https://assets.codepen.io/2585/rubber-tree.webp)">
+          <input type="radio" name="images" value="Rubber Tree">
+        </label>
+      </fieldset>
+</section>
+
+<style>
+    section {
+        background-color: var(--color-moira-contrast);
+        color: var(--color-moira-base);
+        padding-inline: var(--space-inline-layout);
+        padding-block: var(--space-block-laytout);
+
+        > div {
+        max-inline-size: 1512px;
+        margin-inline: auto ;
+        margin-block-end: 4rem;
+
+        >:where(h2) {
+            text-transform: uppercase;
+        }
+
+        >:is(.btn-group) {
+            justify-content: end;
+        }
+
+        @media (width < 661px) {
+            div:is(.btn-group) {
+             justify-content: start;
+            }
+        }
+
+       }
+    }
+
+@layer artists {
+  fieldset {
+    inline-size: 100%;
+    max-inline-size: 1512px;
+    margin-inline: auto ;
+
+    grid-template-columns: 
+      var(--col-1, 1fr) 
+      var(--col-2, 1fr) 
+      var(--col-3, 1fr) 
+      var(--col-4, 1fr) 
+      var(--col-5, 1fr)
+    ;
+    
+    @media (prefers-reduced-motion: no-preference) {
+      transition: grid-template-columns .5s ease-in-out;
+    }
+    
+    &:has(label:nth-child(1) > input:checked) {
+      --col-1: 5fr;
+      --col-2: 3fr;
+    }
+    &:has(label:nth-child(2) > input:checked) {
+      --col-1: 2fr;
+      --col-2: 5fr;
+      --col-3: 2fr;
+    }
+    &:has(label:nth-child(3) > input:checked) {
+      --col-2: 2fr;
+      --col-3: 5fr;
+      --col-4: 2fr;
+    }
+    &:has(label:nth-child(4) > input:checked) {
+      --col-3: 2fr;
+      --col-4: 5fr;
+      --col-5: 2fr;
+    }
+    &:has(label:nth-child(5) > input:checked) {
+      --col-4: 3fr;
+      --col-5: 5fr;
+    }
+    
+    > label {
+      background-image: var(--_img);
+      background-position: center;
+      background-size: auto 125%;
+    }
+  }
+}
+
+@layer artists.support {
+  
+  fieldset {
+    inline-size: 80vw;
+    
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: 50vh;
+    gap: 1rem;
+    border: none;
+    
+    > label {
+      cursor: pointer;
+      border-radius: 65px;
+      
+      &:focus-within {
+        outline: 1px solid var(--color-moira-accent2);
+        outline-offset: 5px;
+      }
+      
+      > input {
+        opacity: 0;
+      }
+    }
+  }
+}
+</style>
