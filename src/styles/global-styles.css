@@ -5,9 +5,11 @@
     --color-moira-accent: #B1F250;
     --color-moira-accent2: #C291F2;
 
-    --font-size-morira-x-large: clamp(2.813rem, 2.494rem + 1.59vw, 4rem);
-    --font-size-morira-large: clamp(2rem, 1.732rem + 1.34vw, 3rem);
-    --font-size-moira-medium: clamp(0.875rem, 0.808rem + 0.34vw, 1.125rem);
+    --font-size-morira-xx-large: clamp(2.813rem, 2.494rem + 1.59vw, 4rem);
+    --font-size-morira-x-large: clamp(2rem, 1.732rem + 1.34vw, 3rem);
+    --font-size-morira-large: clamp(1.125rem, 1.024rem + 0.5vw, 1.5rem);
+    --font-size-moira-medium: clamp(1rem, 0.933rem + 0.34vw, 1.25rem);
+    --font-size-moira-regular: clamp(0.875rem, 0.808rem + 0.34vw, 1.125rem);
 
     --space-inline-layout: clamp(1rem, -0.074rem + 5.37vw, 5rem);
     --space-block-laytout: clamp(1.25rem, 0.243rem + 5.03vw, 5rem);
@@ -68,21 +70,40 @@
 @layer layout.base {  
 
     h1 { 
-        font-size: var(--font-size-morira-x-large);
+        font-size: var(--font-size-morira-xx-large);
         text-transform: uppercase;
         text-align: center;
         text-wrap: balance;
+        color: inherit;
     }
 
     h2 {
+        font-size: var(--font-size-morira-x-large);
+        line-height: 1.1;
+        text-wrap: balance;
+        text-transform: uppercase;
+        color: inherit;
+
+    }
+
+    h3 {
         font-size: var(--font-size-morira-large);
         line-height: 1.1;
         text-wrap: balance;
+        text-transform: uppercase;
+        color: inherit;
+    }
+    h4 {
+        font-size: var(--font-size-moira-medium);
+        line-height: 1.1;
+        text-wrap: balance;
+        text-transform: uppercase;
+        color: inherit;
 
     }
 
     p {
-        font-size: var(--font-size-moira-medium);
+        font-size: var(--font-size-moira-regular);
         text-wrap: pretty;
         color: inherit;
     };

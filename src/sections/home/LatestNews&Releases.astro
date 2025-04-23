@@ -1,0 +1,49 @@
+---
+import Buttons from "@components/Buttons.astro";
+import CardNews from "@components/CardNews.astro";
+
+const buttons = [{ label: "Todas las noticias", type: "secondary", href: "#" }];
+---
+
+<section>
+    <div>
+        <div
+            class="grid layout-container"
+            max-column-count="2"
+            grid-gap="32px"
+            min-container-grid="280px"
+        >
+            <h2>Últimas Noticias y Lanzamientos</h2>
+            <Buttons buttons={buttons} />
+        </div>
+
+        <div layout-container>
+            <CardNews />
+        </div>
+    </div>
+</section>
+
+<style>
+    section {
+        color: var(--color-moira-contrast);
+        padding-inline: var(--space-inline-layout);
+        padding-block: var(--space-block-laytout);
+
+        > div {
+            display: grid;
+            max-inline-size: 1512px;
+            margin-inline: auto;
+            gap: 2rem;
+
+            div:is(div > .btn-group) {
+             justify-content: end;    
+            }
+
+            @media (width < 661px) {
+                div:is(div > .btn-group) {
+                    justify-content: start;
+                }
+            }
+        }
+    }
+</style>

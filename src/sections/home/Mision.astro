@@ -1,5 +1,6 @@
 ---
 import Buttons from "@components/Buttons.astro";
+import ImageMision from "@assets/images/image-moirasound.webp";
 
 const buttons = [
     { label: "Conoce nuestra misión", type: "secondary", href: "#" },
@@ -22,7 +23,7 @@ const buttons = [
             <Buttons buttons={buttons} />
         </div>
         <figure>
-            <img src="" alt="imagen de misión" />
+            <img src={ImageMision.src} alt="imagen de misión" />
         </figure>
     </div>
 </section>
@@ -51,5 +52,10 @@ const buttons = [
                 }
             }
         }
+    }
+
+    figure {
+        border-radius: 65px;
+        overflow: hidden;
     }
 </style>

@@ -1,17 +1,58 @@
 ---
 import Buttons from "@components/Buttons.astro";
-const buttons = [
-    { label: "Todos los eventos", type: "primary", href: "#" },
-];
+import Card from "@components/Card.astro";
+const buttons = [{ label: "Todos los eventos", type: "primary", href: "#" }];
 ---
+
 <section>
-    <div 
-        class="grid"
-        max-column-count="3"
-        grid-gap="32px"
-        min-container-grid ="280px"
-    >
-        <h2>Artistas Destacados</h2>
-        <Buttons buttons={buttons}/>
+    <div>
+        <div
+            class="grid"
+            max-column-count="3"
+            grid-gap="32px"
+            min-container-grid="280px"
+        >
+            <h2>Próximos Eventos</h2>
+            <h3>Encuentra nuestros lanzamientos o jam sessions</h3>
+            <Buttons buttons={buttons} />
+        </div>
+        <div
+            class="grid"
+            max-column-count="3"
+            grid-gap="32px"
+            min-container-grid="200px"
+        >
+            <Card />
+            <Card />
+            <Card />
+        </div>
     </div>
 </section>
+
+<style>
+     section {
+       
+        color: var(--color-moira-contrast);
+        padding-inline: var(--space-inline-layout);
+        padding-block: var(--space-block-laytout);
+
+        > div {
+        display: grid;
+        max-inline-size: 1512px;
+        margin-inline: auto ;
+        gap: 2rem;
+        
+
+        div:is(div > .btn-group) {
+             justify-content: end;    
+            }
+
+        @media (width < 1110px) {
+            div:is(div > .btn-group) {
+             justify-content: start;    
+            }
+        }
+
+       }
+    }
+</style>

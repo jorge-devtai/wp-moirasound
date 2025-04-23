@@ -1,0 +1,72 @@
+<article class="wrapper-card">
+    <div>
+        <aside class="item">
+            <p>Entrevista</p>
+        </aside>
+
+        <div class="card-info-container">
+            <div>
+                <h3>Encuentra nuestros lanzamientos o jam sessions</h3>
+                <p>Encuentra nuestros lanzamientos o jam sessions</p>
+            </div>
+            <p>Abril 26, 2025</p>
+        </div>
+
+        <figure>
+            <img
+                src=""
+                alt="Imagen de noticia"
+                loading="lazy"
+                width="100%"
+                height="280"
+            />
+        </figure>
+    </div>
+</article>
+
+<style>
+    .wrapper-card {
+        display: grid;
+        border-block: 1px solid var(--color-moira-contrast);
+        padding-block: clamp(2rem, 1.631rem + 1.85vw, 3.375rem);
+
+        > div {
+            display: flex;
+            flex-wrap: wrap;
+            inline-size: 100%;
+            gap:54px;
+            justify-content: space-between;
+
+            .item {
+                flex: 1 2 auto;
+                inline-size: fit-content;
+                > p {
+                    color: var(--color-moira-contrast2);
+                    text-transform: uppercase;
+                }
+            }
+
+            .card-info-container {
+                flex: 2 1 49ch;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                > div {
+                    display: grid;
+                    gap: 1rem;
+                }
+            }
+
+            figure {
+                flex: 3 1 min(280px, 50%);
+                border-radius: 65px;
+                overflow: hidden;
+
+                > img {
+                    background-color: beige;
+                }
+            }
+        }
+    }
+</style>
