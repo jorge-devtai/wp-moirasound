@@ -1,8 +1,12 @@
 ---
 import Buttons from "@components/Buttons.astro";
+import { getArtistInfo } from '@libs/wp'
 const buttons = [
     { label: "Ver todos los artistas", type: "primary", href: "#" },
 ];
+
+const artists = await getArtistInfo({ perPage: 5 });
+const {title} = artists;
 ---
 <section>
     <div 
@@ -11,7 +15,7 @@ const buttons = [
         grid-gap="32px"
         min-container-grid ="280px"
     >
-        <h2>Artistas Destacados</h2>
+        <h2>{title}</h2>
         <Buttons buttons={buttons}/>
     </div>
     <fieldset>
