@@ -1,0 +1,11 @@
+---
+interface Props {
+  artistName: string
+}
+
+const { artistName } = Astro.props 
+---
+
+<label style="--_img: url(https://assets.codepen.io/2585/fiddle-leaf.jpeg)">          
+    <input type="radio" name="images" value={artistName}>
+</label>

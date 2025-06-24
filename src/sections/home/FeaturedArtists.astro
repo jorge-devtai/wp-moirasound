@@ -1,12 +1,14 @@
 ---
 import Buttons from "@components/Buttons.astro";
-import { getArtistInfo } from '@libs/wp'
+import CardArtist from "@components/CardArtist.astro";
+import  { getArtistInfo } from '@libs/wp.ts' 
 const buttons = [
     { label: "Ver todos los artistas", type: "primary", href: "#" },
 ];
 
-const artists = await getArtistInfo({ perPage: 5 });
-const {title} = artists;
+const artists = await getArtistInfo({ perPage: 3 });
+
+
 ---
 <section>
     <div 
@@ -15,11 +17,14 @@ const {title} = artists;
         grid-gap="32px"
         min-container-grid ="280px"
     >
-        <h2>{title}</h2>
+        <h2>Artistas</h2>
+  
         <Buttons buttons={buttons}/>
     </div>
     <fieldset>
-        <label style="--_img: url(https://assets.codepen.io/2585/fiddle-leaf.jpeg)">          
+      { artists.map(artist => <CardArtist  artistName={artist.artistName} /> ) }
+
+       <!--  <label style="--_img: url(https://assets.codepen.io/2585/fiddle-leaf.jpeg)">          
           <input type="radio" name="images" value="Fiddle Leaf">
         </label>
         <label style="--_img: url(https://assets.codepen.io/2585/pink-princess.jpeg)">
@@ -33,7 +38,7 @@ const {title} = artists;
         </label>
         <label style="--_img: url(https://assets.codepen.io/2585/rubber-tree.webp)">
           <input type="radio" name="images" value="Rubber Tree">
-        </label>
+        </label> -->
       </fieldset>
 </section>
 
