@@ -7,8 +7,6 @@ const buttons = [
 ];
 
 const artists = await getArtistInfo({ perPage: 3 });
-
-
 ---
 <section>
     <div 
@@ -22,23 +20,14 @@ const artists = await getArtistInfo({ perPage: 3 });
         <Buttons buttons={buttons}/>
     </div>
     <fieldset>
-      { artists.map(artist => <CardArtist  artistName={artist.artistName} /> ) }
-
-       <!--  <label style="--_img: url(https://assets.codepen.io/2585/fiddle-leaf.jpeg)">          
-          <input type="radio" name="images" value="Fiddle Leaf">
-        </label>
-        <label style="--_img: url(https://assets.codepen.io/2585/pink-princess.jpeg)">
-          <input type="radio" name="images" value="Pink Princess">
-        </label>
-        <label style="--_img: url(https://assets.codepen.io/2585/kara-eads-zcVArTF8Frs-unsplash.jpg)">
-          <input type="radio" name="images" value="Monstera" checked>
-        </label>
-        <label style="--_img: url(https://assets.codepen.io/2585/pothos.jpeg)">
-          <input type="radio" name="images" value="Pothos">
-        </label>
-        <label style="--_img: url(https://assets.codepen.io/2585/rubber-tree.webp)">
-          <input type="radio" name="images" value="Rubber Tree">
-        </label> -->
+      { artists.map(artist => 
+        <CardArtist  
+          artistName={artist.artistName} 
+          artistDescription={artist.artistDescription}
+          featuredImage={artist.featuredImage} 
+          styleName={artist.styleName}
+          country={artist.country}
+      /> ) }
       </fieldset>
 </section>
 
@@ -50,9 +39,9 @@ const artists = await getArtistInfo({ perPage: 3 });
         padding-block: var(--space-block-laytout);
 
         > div {
-        max-inline-size: 1512px;
-        margin-inline: auto ;
-        margin-block-end: 4rem;
+            max-inline-size: 1512px;
+            margin-inline: auto ;
+            margin-block-end: 4rem;
 
         >:is(.btn-group) {
             justify-content: end;
@@ -110,9 +99,14 @@ const artists = await getArtistInfo({ perPage: 3 });
     }
     
     > label {
-      background-image: var(--_img);
+      --_gradient: url("http://localhost:8881/wp-content/uploads/2025/07/gradient.png");
+
+      background-image: var(--_gradient), var(--_img);
+      background-blend-mode: normal;
+      background-repeat: no-repeat;
       background-position: center;
       background-size: auto 125%;
+      background-size: cover;
     }
   }
 }
