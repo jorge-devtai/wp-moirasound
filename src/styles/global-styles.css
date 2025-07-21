@@ -139,3 +139,14 @@
         );
       }
 }
+
+@layer setTag {
+    .tag {
+        --_tag1: var(--color-moira-contrast2);
+        --_tag2: var(--color-moira-accent2);
+        
+        padding: .5rem 1rem;
+        border-radius: 50px;
+        max-inline-size: fit-content;
+    }
+}

@@ -1,0 +1,50 @@
+---
+interface EventProps {
+    titleEvent?: string;
+    eventName?: string;
+    eventAddress?: string;
+    eventDate?: string;
+    eventTime?: string;
+    artistName?: string;
+    featuredImageEvent?: string;
+    eventType?: string;
+}
+
+const { titleEvent, eventName, eventAddress, eventDate, eventTime, artistName, featuredImageEvent, eventType}: EventProps = Astro.props
+const date = eventDate ? new Date(eventDate.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3')) : null;
+---
+<div class="event-card" style=`--_imgEvent: url("${featuredImageEvent}")`>
+    <div class="event-card__info-container">
+        <h4>{eventName}</h4>
+        <p>{date?.toLocaleDateString()}</p>
+        <p>{eventAddress}</p>
+        <p>{artistName}</p>
+        <span class="tag">{eventType}</span>
+    </div>
+</div>
+
+
+<style>
+    .event-card {
+        block-size: 35rem;;
+        max-inline-size: 27.5rem;
+        background-image: var(--_imgEvent);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: var(--color-moira-contrast);
+        border-radius: 65px;
+        padding: 2rem;
+        inline-size: 100%;
+        color: white
+    }
+
+    .event-card__info-container {
+        display: grid;
+        gap: .5rem;
+    }
+
+    .tag {
+      background-color: var(--_tag1);
+    }
+</style>

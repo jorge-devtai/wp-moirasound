@@ -1,20 +1,33 @@
+---
+interface PostProps {
+    titlePost?: string; 
+    excerptPost?: string; 
+    datePost?: string; 
+    featuredImagePost?:string; 
+    postType?: string;
+}
+
+ const { titlePost,  excerptPost, datePost, featuredImagePost, postType }: PostProps = Astro.props;
+---
+
+
 <article class="wrapper-card">
     <div>
         <aside class="item">
-            <p>Entrevista</p>
+            <p>{postType}</p>
         </aside>
 
         <div class="card-info-container">
             <div>
-                <h3>Encuentra nuestros lanzamientos o jam sessions</h3>
-                <p>Encuentra nuestros lanzamientos o jam sessions</p>
+                <h3>{titlePost}</h3>
+                <p set:html={excerptPost}/>
             </div>
-            <p>Abril 26, 2025</p>
+            <p>{datePost}</p>
         </div>
 
         <figure>
             <img
-                src=""
+                src={featuredImagePost}
                 alt="Imagen de noticia"
                 loading="lazy"
                 width="100%"

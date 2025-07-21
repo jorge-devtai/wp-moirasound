@@ -1,8 +1,11 @@
 ---
 import Buttons from "@components/Buttons.astro";
 import CardNews from "@components/CardNews.astro";
+import { getPostsInfo } from "@libs/wp";
 
 const buttons = [{ label: "Todas las noticias", type: "secondary", href: "#" }];
+
+const posts = await getPostsInfo({ perPage: 3 });
 ---
 
 <section>
@@ -18,7 +21,15 @@ const buttons = [{ label: "Todas las noticias", type: "secondary", href: "#" }];
         </div>
 
         <div layout-container>
-            <CardNews />
+            { posts.map((post: any) =>
+                <CardNews 
+                    titlePost={post.titlePost}
+                    excerptPost={post.excerptPost}
+                    datePost={post.datePost}
+                    featuredImagePost={post.featuredImagePost}
+                    postType={post.postType}
+                />
+              )}              
         </div>
     </div>
 </section>

@@ -1,7 +1,11 @@
 ---
 import Buttons from "@components/Buttons.astro";
-import Card from "@components/Card.astro";
+import CardEvent from "@components/CardEvent.astro";
+import { getEventInfo } from "@libs/wp";
+
 const buttons = [{ label: "Todos los eventos", type: "primary", href: "#" }];
+
+const events = await getEventInfo({ perPage: 3 });
 ---
 
 <section>
@@ -22,9 +26,18 @@ const buttons = [{ label: "Todos los eventos", type: "primary", href: "#" }];
             grid-gap="32px"
             min-container-grid="200px"
         >
-            <Card />
-            <Card />
-            <Card />
+        { events.map(event => 
+            <CardEvent 
+                  eventName={event.eventName} 
+                  eventDate={event.eventDate}
+                  eventAddress={event.eventAddress} 
+                  eventTime={event.eventTime}
+                  artistName={event.artistName}
+                  featuredImageEvent={event.featuredImageEvent}
+                  titleEvent={event.titleEvent}
+                  eventType={event.eventType}
+                  
+            /> ) }        
         </div>
     </div>
 </section>
