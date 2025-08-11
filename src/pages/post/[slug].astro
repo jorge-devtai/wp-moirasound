@@ -4,11 +4,11 @@ import { allPagesSlug } from "@libs/wp"
 const slug = Astro.params.slug
 if ( !slug ) return Astro.redirect("/404")
 
-export async function getStaticPaths () {
+export async function getStaticPaths() {
     const slugs = await allPagesSlug(slug) 
-   Array.isArray(slugs)
-  ? slugs.map((slug: any) => ({ params: { slug } }))
-  : []
+   return slugs.map ((slug: string) => ({
+        params: { slug }
+    }))
 }
 ---
 
