@@ -1,5 +1,3 @@
-import { date } from "astro:schema";
-
 const domain = import.meta.env.URL_WP_DOMAIN;
 const apiUrl = `${domain}/wp-json/wp/v2`;
 
@@ -117,3 +115,19 @@ export const getBentoImages = async (slug: string): Promise<string[]> => {
   // 4. Extraer solo las URLs (tamaño "full")
   return media.map((m: any) => m.source_url);
 };
+
+
+export const allPagesSlug = async (slug: string): Promise<string[]> => {
+  const res = await fetch (`${apiUrl}/pages?per_page=100`)
+
+  if (!res.ok ) throw new Error(`HTTP error! Status: ${res.status}`)
+
+    const results = await res.json()
+    if (!results.length ) throw new Error("No pages found")
+
+    const slugs = results.map((page: any) => page.slug)
+    console.log("Estos son los slugs de las páginas:", slugs)
+    return slugs
+}
+
+
