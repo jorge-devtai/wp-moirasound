@@ -1,0 +1,79 @@
+---
+export interface Props {
+    href?: string;
+    buttonText: string;
+    variant?: "primary" | "secondary" | "transparent";
+    size?: "small" | "medium" | "large";
+}
+
+const {
+    href = "#",
+    buttonText = "Button",
+    variant = "primary",
+    size = "medium",
+} = Astro.props;
+---
+
+<a
+    href={href}
+    class:list={["btn", `btn--${variant}`, `btn--${size}`]}
+    >{buttonText}
+</a>
+
+<style>
+    .btn {
+        --btn-bg-primary: var(--color-moira-accent);
+        --btn-bg-secondary: var(--color-moira-accent2);
+        --btn-bg-transparent: transparent;
+        --btn-color-primary: var(--color-moira-contrast);
+        --btn-color-secondary: var(--color-moira-base);
+        --btn-color-transparent: var(--color-moira-contrast);
+        --btn-padding-small: 4px 16px;
+        --btn-padding-medium: 8px 24px;
+        --btn-padding-large: 12px 32px;
+        --btn-font-size-small: 0.875rem;
+        --btn-font-size-medium: 1rem;
+        --btn-font-size-large: 1.125rem;
+
+        display: flex;
+        align-items: center;
+        inline-size: fit-content;
+        border-radius: 50px;
+
+        &:hover {
+            filter: brightness(1.1);
+        }
+    }
+
+    .btn--primary {
+        background-color: var(--btn-bg-primary);
+        color: var(--btn-color-primary);
+    }
+
+    .btn--secondary {
+        background-color: var(--btn-bg-secondary);
+        color: var(--btn-color-secondary);
+    }
+
+    .btn--transparent {
+        background-color: var(--btn-bg-transparent);
+        color: var(--btn-color-transparent);
+        border: 2px solid var(--color-moira-contrast);
+    }
+
+    .btn--small {
+        padding: var(--btn-padding-small);
+        font-size: var(--btn-font-size-small);
+    }
+
+    .btn--medium {
+        padding: var(--btn-padding-medium);
+        font-size: var(--btn-font-size-medium);
+    }
+
+    .btn--large {
+        padding: var(--btn-padding-large);
+        font-size: var(--btn-font-size-large);
+    }
+
+</style>

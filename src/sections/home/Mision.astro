@@ -1,11 +1,7 @@
 ---
-import Buttons from "@components/Buttons.astro";
+import Button from "@components/Button.astro";
 import ImageMision from "@assets/images/image-moirasound.webp";
 
-
-const buttons = [
-    { label: "Conoce nuestra misión", type: "secondary", href: "#" },
-];
 ---
 
 <section>
@@ -21,7 +17,7 @@ const buttons = [
                 Moira Sound difunde y potencia el talento emergente. Conectamos
                 artistas con oportunidades únicas y audiencias globales.
             </p>
-            <Buttons buttons={buttons} />
+            <Button buttonText='Conoce nuestra misión' variant="secondary", size="large"/>
         </div>
         <figure>
             <img src={ImageMision.src} alt="imagen de misión" />

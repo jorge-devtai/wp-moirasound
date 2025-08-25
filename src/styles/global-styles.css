@@ -42,7 +42,7 @@
         background-color: var(--color-moira-base);
     }
 
-    h1, h2, h3, h4, h5, p, span {
+    h1, h2, h3, h4, h5, p, span, a {
         font-family: 'Geologica';
         font-weight: 300;
 

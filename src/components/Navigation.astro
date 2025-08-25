@@ -1,9 +1,9 @@
 ---
-import Logo from '@assets/astro.svg'
+import LogoMoiraSound from '@assets/logoMoiraSound.svg'
 ---
 <header>
     <figure>
-        <img src={Logo.src} alt="Logotipo MoiraSound">
+        <img src={LogoMoiraSound.src} alt="Logotipo MoiraSound" loading="lazy" width="172" height="80"/>
     </figure>
     <nav>
         <menu>
@@ -21,7 +21,21 @@ import Logo from '@assets/astro.svg'
         display: flex;
         background-color: var(--color-moira-contrast);
         justify-content: space-between;
-        padding-inline: 0 2rem;
+        padding-inline: 5rem;
+        padding-block: 1.5rem;
+
+        > figure {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            inline-size: 100px;
+
+            > img {
+                min-inline-size: 100%;
+                block-size: auto;
+                object-fit: cover;
+            }
+        }
 
         & nav {
             display: grid;

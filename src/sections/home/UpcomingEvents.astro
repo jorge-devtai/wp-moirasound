@@ -1,16 +1,14 @@
 ---
-import Buttons from "@components/Buttons.astro";
+import Button from "@components/Button.astro";
 import CardEvent from "@components/CardEvent.astro";
 import { getEventInfo } from "@libs/wp";
-
-const buttons = [{ label: "Todos los eventos", type: "primary", href: "#" }];
 
 const events = await getEventInfo({ perPage: 3 });
 ---
 
-<section>
-    <div>
-        <div
+<artice>
+    <section>
+        <header
             class="grid"
             max-column-count="3"
             grid-gap="32px"
@@ -18,54 +16,67 @@ const events = await getEventInfo({ perPage: 3 });
         >
             <h2>Próximos Eventos</h2>
             <h3>Encuentra nuestros lanzamientos o jam sessions</h3>
-            <Buttons buttons={buttons} />
-        </div>
+            <span class="btn-wrap">
+                <Button
+                    buttonText="Todos los eventos"
+                    variant="primary"
+                    size="large"
+                />
+            </span>
+        </header>
         <div
             class="grid"
             max-column-count="3"
             grid-gap="32px"
             min-container-grid="200px"
         >
-        { events.map(event => 
-            <CardEvent 
-                  eventName={event.eventName} 
-                  eventDate={event.eventDate}
-                  eventAddress={event.eventAddress} 
-                  eventTime={event.eventTime}
-                  artistName={event.artistName}
-                  featuredImageEvent={event.featuredImageEvent}
-                  titleEvent={event.titleEvent}
-                  eventType={event.eventType}
-                  
-            /> ) }        
+            {
+                events.map((event) => (
+                    <CardEvent
+                        eventName={event.eventName}
+                        eventDate={event.eventDate}
+                        eventAddress={event.eventAddress}
+                        eventTime={event.eventTime}
+                        artistName={event.artistName}
+                        featuredImageEvent={event.featuredImageEvent}
+                        titleEvent={event.titleEvent}
+                        eventType={event.eventType}
+                    />
+                ))
+            }
         </div>
-    </div>
-</section>
+    </section>
+</artice>
 
 <style>
-     section {
-       
+    section {
         color: var(--color-moira-contrast);
         padding-inline: var(--space-inline-layout);
         padding-block: var(--space-block-laytout);
 
-        > div {
-        display: grid;
-        max-inline-size: 1512px;
-        margin-inline: auto ;
-        gap: 2rem;
-        
+        > header {
+            display: grid;
+            max-inline-size: 1512px;
+            margin-inline: auto;
+            gap: 2rem;
 
-        div:is(div > .btn-group) {
-             justify-content: end;    
+            > .btn-wrap {
+                display: flex;
+                align-items: start;
+                justify-content: end;
             }
 
-        @media (width < 1110px) {
-            div:is(div > .btn-group) {
-             justify-content: start;    
+            @media (width < 1110px) {
+               header > .btn-wrap {
+                    justify-content: start;
+                }
             }
         }
 
-       }
+        > div {
+            max-inline-size: 1512px;
+            margin-inline: auto;
+            margin-block-start: 4rem;
+        }
     }
 </style>

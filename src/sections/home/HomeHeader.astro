@@ -1,18 +1,15 @@
 ---
-import Buttons from "@components/Buttons.astro";
+import Button from "@components/Button.astro";
 
-const buttons = [
-    { label: "Descubre próximos eventos", type: "primary", href: "#" },
-];
+
 ---
 
 <section>
     <header class="orb">
         <div class="header-content">
             <h1>Impulsando el talento musical del futuro</h1>
-            <Buttons buttons={buttons} />
+            <Button buttonText="Descubre próximos eventos"  variant="primary" size="large" />
         </div>
-        
     </header>
 </section>
 
@@ -46,6 +43,7 @@ const buttons = [
         z-index: 99;
         color: var(--color-moira-base);
         gap:32px;
+        justify-items: center;
     }
 
     .orb {

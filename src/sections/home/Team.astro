@@ -1,0 +1,80 @@
+---
+import Button from "@components/Button.astro";
+---
+
+<article>
+    <section>
+        <div class="team-pictures"></div>
+        <figure>
+            <img
+                src="https://via.placeholder.com/1512x500"
+                alt="Imagen del equipo de Moira Sound"
+            />
+        </figure>
+        <figure>
+            <img
+                src="https://via.placeholder.com/1512x500"
+                alt="Imagen del equipo de Moira Sound"
+            />
+        </figure>
+        <header>
+            <h2>Conoce a nuestro equipo</h2>
+            <p>
+                Detrás de Moira Sound hay un grupo de profesionales apasionados
+                por la música y el sonido. Nuestro equipo está compuesto por
+                ingenieros de sonido, productores musicales, diseñadores de
+                sonido y expertos en tecnología de audio, todos dedicados a
+                ofrecer la mejor experiencia sonora posible.
+            </p>
+            <Button
+                buttonText="Sobre nosotros"
+                variant="secondary"
+                size="large"
+            />
+        </header>
+    </section>
+</article>
+
+<style>
+    section {
+        color: var(--color-moira-contrast);
+        padding-inline: var(--space-inline-layout);
+        padding-block: var(--space-block-laytout);
+        display: flex;
+        gap: 4rem;
+
+        > team-pictures {
+            border-radius: 65px;
+            overflow: hidden;
+            background: url("https://via.placeholder.com/1512x500")
+                center/cover no-repeat;
+
+                flex: 2;
+        }
+
+        > figure {
+            display: flex;
+            border-radius: 65px;
+            overflow: hidden;
+
+            > img {
+                flex: 1;
+                min-inline-size: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+        }
+
+        > header {
+            max-inline-size: 800px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 2rem;
+
+            > :is(h2) {
+                text-transform: uppercase;
+            }
+        }
+    }
+</style>
