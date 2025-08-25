@@ -5,10 +5,8 @@ export const getArtistInfo = async ({ perPage =  3 }: {perPage?: number} = {}) =
   const res = await fetch(`${apiUrl}/artista?per_page=${perPage}&_embed`);
   if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 
-  console.log(res)
-
   const results = await res.json();
-  console.log(results)
+  //console.log(results)
   if (!Array.isArray(results) || !results.length) throw new Error('No Artists found')
     
     const artists = results.map((artist: any) => {
@@ -37,7 +35,7 @@ export const getEventInfo = async ({ perPage = 3 }: { perPage?: number } = {}) =
   if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 
   const dataEvent = await res.json();
-  console.log('Data Información de Eventos:', dataEvent); // Log para verificar los datos recibidos
+//  console.log('Data Información de Eventos:', dataEvent); // Log para verificar los datos recibidos
 
   if (!Array.isArray(dataEvent) || !dataEvent.length) throw new Error('No Events found');
 
@@ -68,7 +66,7 @@ export const getPostsInfo = async ({perPage = 3}: { perPage?: number } = {}) => 
 
   const dataPosts = await res.json();
 
-  console.log("Información de Posts:", dataPosts)
+//  console.log("Información de Posts:", dataPosts)
 
   const posts = dataPosts.map((post: any) => {
     const {
@@ -87,7 +85,7 @@ export const getPostsInfo = async ({perPage = 3}: { perPage?: number } = {}) => 
 
     return { titlePost, contentPost, excerptPost, datePost, featuredImagePost, postType, }
   })
-  console.log("esto es el post especifico:", posts)
+//  console.log("esto es el post especifico:", posts)
   return posts; 
   
 }
@@ -110,14 +108,14 @@ export const getBentoImages = async (slug: string): Promise<string[]> => {
   if (!mediaRes.ok) throw new Error(`Media fetch failed: ${mediaRes.status}`);
 
   const media = await mediaRes.json();
-  console.log("Esto son las imagenes de gallery",media)
+//  console.log("Esto son las imagenes de gallery",media)
 
   // 4. Extraer solo las URLs (tamaño "full")
   return media.map((m: any) => m.source_url);
 };
 
 
-export const allPagesSlug = async (slug: string): Promise<string[]> => {
+export const allPagesSlug = async () => {
   const res = await fetch (`${apiUrl}/pages?per_page=100`)
 
   if (!res.ok ) throw new Error(`HTTP error! Status: ${res.status}`)
@@ -131,3 +129,34 @@ export const allPagesSlug = async (slug: string): Promise<string[]> => {
 }
 
 
+/* export const getNavMenu = async () => {
+  const res = await fetch (`${apiUrl}/menu-items`)
+
+  if (!res.ok ) throw new Error(`HTTP error! Status: ${res.status}`)
+
+    const menu = await res.json()
+    if (!menu.items.length ) throw new Error("No menu items found")
+
+      const items = menu.map((item: any) => {
+        const { title: {rendered: title }, url: urlMenu } = item
+        console.log("Estos son los items del menú:", title, urlMenu)
+        return { title, urlMenu }
+        
+      })
+
+    return items
+} */
+
+
+    export const getNavMenu = async () => {
+  const res = await fetch(`${apiUrl}/menu-items`);
+  if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
+  const items = await res.json();   // <-- es un array directamente
+
+  return items.map((item: any) => ({
+    title: item.title.rendered,
+    url:   item.url,
+    slug:  new URL(item.url).pathname.replace(/^\/|\/$/g, ''),
+  }));
+};

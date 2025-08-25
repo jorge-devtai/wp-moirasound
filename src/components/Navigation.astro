@@ -1,5 +1,9 @@
 ---
 import LogoMoiraSound from '@assets/logoMoiraSound.svg'
+import { getNavMenu } from '@libs/wp.ts'
+
+const menuItems = await getNavMenu()
+
 ---
 <header>
     <figure>
@@ -7,6 +11,10 @@ import LogoMoiraSound from '@assets/logoMoiraSound.svg'
     </figure>
     <nav>
         <menu>
+            {menuItems.map((item: any) => (
+                <li><a href={item.ulrMenu}>{item.title}</a></li>
+            ))}
+        
             <li><a href="">Sobre Nosotros</a></li>
             <li><a href="">Artistas</a></li>
             <li><a href="">Eventos</a></li>
