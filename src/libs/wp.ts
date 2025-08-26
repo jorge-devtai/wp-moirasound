@@ -1,4 +1,4 @@
-const domain = import.meta.env.URL_WP_DOMAIN;
+const domain = import.meta.env.PUBLIC_URL_WP_DOMAIN;
 const apiUrl = `${domain}/wp-json/wp/v2`;
 
 export const getArtistInfo = async ({ perPage =  3 }: {perPage?: number} = {}) => {
@@ -124,39 +124,38 @@ export const allPagesSlug = async () => {
     if (!results.length ) throw new Error("No pages found")
 
     const slugs = results.map((page: any) => page.slug)
-    console.log("Estos son los slugs de las páginas:", slugs)
+   // console.log("Estos son los slugs de las páginas:", slugs)
     return slugs
 }
 
+export const getNavMenu = async () => {
 
-/* export const getNavMenu = async () => {
-  const res = await fetch (`${apiUrl}/menu-items`)
+  const user = import.meta.env.PUBLIC_WP_USER;
+  const pass = import.meta.env.PUBLIC_WP_PASS;
 
-  if (!res.ok ) throw new Error(`HTTP error! Status: ${res.status}`)
+  if (!user || !pass) {
+    throw new Error('WP_USERNAME y WP_PASSWORD deben estar configurados');
+  }
 
-    const menu = await res.json()
-    if (!menu.items.length ) throw new Error("No menu items found")
-
-      const items = menu.map((item: any) => {
-        const { title: {rendered: title }, url: urlMenu } = item
-        console.log("Estos son los items del menú:", title, urlMenu)
-        return { title, urlMenu }
-        
-      })
-
-    return items
-} */
-
-
-    export const getNavMenu = async () => {
-  const res = await fetch(`${apiUrl}/menu-items`);
+   const token = btoa(`${user}:${pass}`);
+  
+  const res = await fetch(`${apiUrl}/menu-items?_fields=title,url`, {
+    headers: {
+       Authorization: `Basic ${token}`,
+    },
+  });
   if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 
-  const items = await res.json();   // <-- es un array directamente
+  const menu = await res.json();
+  if (!menu.length) throw new Error("No menu items found");
 
-  return items.map((item: any) => ({
-    title: item.title.rendered,
-    url:   item.url,
-    slug:  new URL(item.url).pathname.replace(/^\/|\/$/g, ''),
-  }));
-};
+  console.log("Datos crudos del menú:", menu );
+
+  const menuItems = menu.map((item: any) => {
+    const { title: { rendered: title }, url } = item;
+    return { title, url };
+  });
+  
+  console.log("Estos son los items del menú:", menuItems);
+  return menuItems;
+}
