@@ -115,7 +115,7 @@ export const getBentoImages = async (slug: string): Promise<string[]> => {
 };
 
 
-export const allPagesSlug = async () => {
+export const allPagesSlug = async (slug: any) => {
   const res = await fetch (`${apiUrl}/pages?per_page=100`)
 
   if (!res.ok ) throw new Error(`HTTP error! Status: ${res.status}`)
@@ -124,7 +124,7 @@ export const allPagesSlug = async () => {
     if (!results.length ) throw new Error("No pages found")
 
     const slugs = results.map((page: any) => page.slug)
-   // console.log("Estos son los slugs de las páginas:", slugs)
+    console.log("Estos son los slugs de las páginas:", slugs)
     return slugs
 }
 
@@ -149,13 +149,13 @@ export const getNavMenu = async () => {
   const menu = await res.json();
   if (!menu.length) throw new Error("No menu items found");
 
-  console.log("Datos crudos del menú:", menu );
+  // console.log("Datos crudos del menú:", menu );
 
   const menuItems = menu.map((item: any) => {
     const { title: { rendered: title }, url } = item;
     return { title, url };
   });
   
-  console.log("Estos son los items del menú:", menuItems);
+  //console.log("Estos son los items del menú:", menuItems);
   return menuItems;
 }

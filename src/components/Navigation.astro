@@ -10,9 +10,14 @@ const menuItems = await getNavMenu();
     </figure>
     <nav>
         <menu>
-          {menuItems.map((item:any) => (
-            <li><a href={item.url}>{item.title}</a></li>
-          ))}
+           { menuItems.map((item: any) => {
+            const urlPath = new URL(item.url).pathname;
+            return (
+              <li >
+                <a href={urlPath}>{item.title}</a>
+              </li>
+            );
+          })}
         </menu>
     </nav>
 </header>
