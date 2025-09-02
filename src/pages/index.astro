@@ -3,7 +3,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import BentoGallery from '@sections/home/BentoGallery.astro';
 import FeaturedArtists from '@sections/home/FeaturedArtists.astro';
-import HomeHeader from '@sections/home/HomeHeader.astro';
+import Hero from '@sections/home/Hero.astro';
 import LatestNewsReleases from '@sections/home/LatestNews&Releases.astro';
 import Mision from '@sections/home/Mision.astro';
 import UpcomingEvents from '@sections/home/UpcomingEvents.astro';
@@ -15,7 +15,7 @@ const pageTitle = 'Moira Sound'
 ---
 
 <BaseLayout  pageTitle = {pageTitle}>
-	<HomeHeader />
+	<Hero />
 	<Mision />
 	<FeaturedArtists />
 	<UpcomingEvents />

@@ -115,18 +115,18 @@ export const getBentoImages = async (slug: string): Promise<string[]> => {
 };
 
 
-export const allPagesSlug = async (slug: any) => {
-  const res = await fetch (`${apiUrl}/pages?per_page=100`)
+  export const allPagesSlug = async (): Promise<string[]> => {
+    const res = await fetch (`${apiUrl}/pages?per_page=100`)
 
-  if (!res.ok ) throw new Error(`HTTP error! Status: ${res.status}`)
+    if (!res.ok ) throw new Error(`HTTP error! Status: ${res.status}`)
 
-    const results = await res.json()
-    if (!results.length ) throw new Error("No pages found")
+      const results = await res.json()
+      if (!results.length ) throw new Error("No pages found")
 
-    const slugs = results.map((page: any) => page.slug)
-    console.log("Estos son los slugs de las páginas:", slugs)
-    return slugs
-}
+      const slugs = results.map((page: any) => page.slug)
+      console.log("Estos son los slugs de las páginas:", slugs)
+      return slugs
+  }
 
 export const getNavMenu = async () => {
 
@@ -159,3 +159,45 @@ export const getNavMenu = async () => {
   //console.log("Estos son los items del menú:", menuItems);
   return menuItems;
 }
+
+
+
+export const getPostsByType = async (
+  postType: string,
+  { perPage = 3 }: { perPage?: number } = {}
+) => {
+  const res = await fetch(
+    `${apiUrl}/types/${postType}?per_page=${perPage}&_embed`
+  );
+  if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
+  const results = await res.json();
+  if (!Array.isArray(results) || !results.length)
+    throw new Error(`No ${postType} found`);
+
+  return results.map((item: any) => {
+    const {
+      title: { rendered: title },
+      acf = {},
+      _embedded: { 'wp:featuredmedia': media, 'wp:term': terms } = {},
+    } = item;
+
+    const featuredImage = media?.[0]?.source_url ?? '';
+    const taxonomyValues = (tax: string) =>
+      terms
+        ?.find((t: any) => t?.[0]?.taxonomy === tax)
+        ?.map((t: any) => t.name) ?? [];
+
+    // Campos ACF dinámicos: nombre y descripción
+    const name = acf[`${postType}_name`] ?? '';
+    const description = acf[`${postType}_description`] ?? '';
+    console.log('Item ACF:', acf);
+    return {
+      title,
+      name,
+      description,
+      featuredImage,
+      taxonomies: taxonomyValues,
+    };
+  });
+};
