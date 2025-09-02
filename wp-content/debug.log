@@ -1,1 +1,13 @@
 [19-Mar-2025 11:19:48 UTC] PHP Warning:  Undefined array key "host" in /var/www/html/wp-includes/pluggable.php on line 1625
+[25-Aug-2025 11:21:59 UTC] PHP Warning:  Attempt to read property "title" on null in /var/www/html/wp-includes/class-wp-customize-widgets.php on line 926
+[25-Aug-2025 11:22:00 UTC] PHP Warning:  Undefined array key "path" in /var/www/html/wp-includes/class-wp-customize-manager.php on line 1998
+[25-Aug-2025 11:22:00 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/wp-includes/class-wp-customize-manager.php:1998) in /var/www/html/wp-includes/pluggable.php on line 1450
+[25-Aug-2025 11:22:00 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/wp-includes/class-wp-customize-manager.php:1998) in /var/www/html/wp-includes/pluggable.php on line 1453
+[25-Aug-2025 11:22:34 UTC] PHP Warning:  Attempt to read property "title" on null in /var/www/html/wp-includes/class-wp-customize-widgets.php on line 926
+[25-Aug-2025 11:22:35 UTC] PHP Warning:  Undefined array key "path" in /var/www/html/wp-includes/class-wp-customize-manager.php on line 1998
+[25-Aug-2025 11:22:35 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/wp-includes/class-wp-customize-manager.php:1998) in /var/www/html/wp-includes/pluggable.php on line 1450
+[25-Aug-2025 11:22:35 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/wp-includes/class-wp-customize-manager.php:1998) in /var/www/html/wp-includes/pluggable.php on line 1453
+[25-Aug-2025 12:33:49 UTC] PHP Warning:  Attempt to read property "title" on null in /var/www/html/wp-includes/class-wp-customize-widgets.php on line 926
+[25-Aug-2025 12:33:50 UTC] PHP Warning:  Undefined array key "path" in /var/www/html/wp-includes/class-wp-customize-manager.php on line 1998
+[25-Aug-2025 12:33:50 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/wp-includes/class-wp-customize-manager.php:1998) in /var/www/html/wp-includes/pluggable.php on line 1450
+[25-Aug-2025 12:33:50 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/wp-includes/class-wp-customize-manager.php:1998) in /var/www/html/wp-includes/pluggable.php on line 1453
