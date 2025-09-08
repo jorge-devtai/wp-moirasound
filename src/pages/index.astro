@@ -1,25 +1,76 @@
 ---
-
-import BaseLayout from '@layouts/BaseLayout.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+import Mision from '@sections/home/Mision.astro';
 import BentoGallery from '@sections/home/BentoGallery.astro';
 import FeaturedArtists from '@sections/home/FeaturedArtists.astro';
 import Hero from '@sections/home/Hero.astro';
 import LatestNewsReleases from '@sections/home/LatestNews&Releases.astro';
-import Mision from '@sections/home/Mision.astro';
+
 import UpcomingEvents from '@sections/home/UpcomingEvents.astro';
 import Team from '@sections/home/Team.astro';
 
 
-const pageTitle = 'Moira Sound'
+import { getInfoPage } from '@libs/apiPages.ts';
+
+const { 
+	pageSlug, 
+	pageTitle, 
+	heroTitle, 
+	heroDescription, 
+	heroButton,
+	featureTitle, 
+	featureDescription,
+	featureButton, 
+	//featureImageUrl, 
+	teamTitle, 
+	teamDescription,
+	teamButton,
+	artistsTitle,
+	artistsSubtitle,
+	artistButton,
+	eventsTitle,
+	eventsSubtitle,
+	eventButton,
+	newsTitle,
+	newsSubtitle,
+	newsButton,
+} = await getInfoPage('inicio')
+
+
+
 
 ---
+<PageLayout
+  slug={pageSlug}
+  pageTitle={pageTitle}
+  heroTitle={heroTitle}
+  heroButton={heroButton}
+>
+<Mision 
+	featureTitle={featureTitle}
+	featureDescription={featureDescription}
+	featureButton={featureButton}
+/>
+<FeaturedArtists 
+	artistsTitle={artistsTitle}
+	artistButton={artistButton}
+/>
+<UpcomingEvents 
+	eventsTitle={eventsTitle}
+	eventsSubtitle={eventsSubtitle}
+	eventButton={eventButton}
+/>
+<LatestNewsReleases 
+	newsTitle={newsTitle}
+	newsSubtitle={newsSubtitle}
+	newsButton={newsButton}
+/>
+<BentoGallery />
+<Team 
+	teamTitle={teamTitle}
+	teamDescription={teamDescription}
+	teamButton={teamButton}
+/>
+	
+</PageLayout>
 
-<BaseLayout  pageTitle = {pageTitle}>
-	<Hero />
-	<Mision />
-	<FeaturedArtists />
-	<UpcomingEvents />
-	<LatestNewsReleases />
-	<BentoGallery />
-	<Team />
-</BaseLayout>

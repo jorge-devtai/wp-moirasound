@@ -2,6 +2,8 @@
 import Button from "@components/Button.astro";
 import ImageMision from "@assets/images/image-moirasound.webp";
 
+const { featureTitle, featureDescription, featureButton} = Astro.props
+
 ---
 
 <section>
@@ -12,12 +14,17 @@ import ImageMision from "@assets/images/image-moirasound.webp";
         min-container-grid="200px"
     >
         <div>
-            <h2>Titulo</h2>
-            <p>
-                Moira Sound difunde y potencia el talento emergente. Conectamos
-                artistas con oportunidades únicas y audiencias globales.
-            </p>
-            <Button buttonText='Conoce nuestra misión' variant="secondary", size="large"/>
+            <h2>{featureTitle}</h2>
+            <p>{featureDescription}</p>
+              {featureButton && (
+                <Button
+                    buttonText={featureButton.buttonText}
+                    href={featureButton.href}
+                    target={featureButton.target}
+                    variant="secondary"
+                    size="large"
+                />
+            )}
         </div>
         <figure>
             <img src={ImageMision.src} alt="imagen de misión" />

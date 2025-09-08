@@ -1,11 +1,13 @@
 ---
-import Buttons from "@components/Buttons.astro";
+import Button from "@components/Button.astro";
 import CardNews from "@components/CardNews.astro";
 import { getPostsInfo } from "@libs/wp";
 
 const buttons = [{ label: "Todas las noticias", type: "secondary", href: "#" }];
 
 const posts = await getPostsInfo({ perPage: 3 });
+
+const { newsTitle, newsButton } = Astro.props;
 ---
 
 <section>
@@ -16,20 +18,31 @@ const posts = await getPostsInfo({ perPage: 3 });
             grid-gap="32px"
             min-container-grid="280px"
         >
-            <h2>Últimas Noticias y Lanzamientos</h2>
-            <Buttons buttons={buttons} />
+            <h2>{newsTitle}</h2>
+
+            {newsButton && (
+                    <Button
+                        buttonText={newsButton.buttonText}
+                        href={newsButton.href}
+                        target={newsButton.target}
+                        variant="secondary"
+                        size="large"
+                    />
+            )}
         </div>
 
         <div layout-container>
-            { posts.map((post: any) =>
-                <CardNews 
-                    titlePost={post.titlePost}
-                    excerptPost={post.excerptPost}
-                    datePost={post.datePost}
-                    featuredImagePost={post.featuredImagePost}
-                    postType={post.postType}
-                />
-              )}              
+            {
+                posts.map((post: any) => (
+                    <CardNews
+                        titlePost={post.titlePost}
+                        excerptPost={post.excerptPost}
+                        datePost={post.datePost}
+                        featuredImagePost={post.featuredImagePost}
+                        postType={post.postType}
+                    />
+                ))
+            }
         </div>
     </div>
 </section>
@@ -47,7 +60,7 @@ const posts = await getPostsInfo({ perPage: 3 });
             gap: 2rem;
 
             div:is(div > .btn-group) {
-             justify-content: end;    
+                justify-content: end;
             }
 
             @media (width < 661px) {

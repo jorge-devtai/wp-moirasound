@@ -4,6 +4,8 @@ import CardArtist from "@components/CardArtist.astro";
 import { getArtistInfo } from "@libs/wp.ts";
 
 const artists = await getArtistInfo({ perPage: 3 });
+
+const { artistsTitle, artistButton } = Astro.props;
 ---
 
 <section>
@@ -13,14 +15,18 @@ const artists = await getArtistInfo({ perPage: 3 });
     grid-gap="32px"
     min-container-grid="280px"
   >
-    <h2>Artistas</h2>
+    <h2>{artistsTitle}</h2>
     <span>
-      <Button
-        buttonText="Ver todos los artistas"
-        variant="primary"
-        ,
-        size="large"
-      />
+      {artistButton && (
+        <Button
+          buttonText={artistButton.buttonText}
+          href={artistButton.href}
+          target={artistButton.target}
+          variant="primary"
+          size="large"
+        />
+      )
+      }
     </span>
   </div>
   <fieldset>

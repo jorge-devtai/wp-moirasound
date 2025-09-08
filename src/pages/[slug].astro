@@ -1,17 +1,34 @@
 ---
-import { allPagesSlug } from "@libs/wp"
-import BaseLayout from "@layouts/BaseLayout.astro"
-
-const slug = Astro.params.slug
-if (!slug) return Astro.redirect('/')
+import { getAllSlugsPages, getInfoPage } from "@libs/apiPages.ts"
+import PageLayout from "@layouts/PageLayout.astro"
 
 export async function getStaticPaths() {
-  const slugs = await allPagesSlug()
+  const slugs = await getAllSlugsPages()
   return slugs.map((slug: string) => ({ params: { slug } }))
 }
 
----
+const { slug } = Astro.params
+const pageData = await getInfoPage(slug)
+if (!pageData) return Astro.redirect('/404')
 
-<BaseLayout pageTitle= { Astro.params.slug }>
-    <h1>Página dinámica para: {Astro.params.slug}</h1>
-</BaseLayout>
+const { pageTitle, heroTitle, heroDescription } = pageData
+
+console.log(pageData)
+
+
+
+---
+<PageLayout
+  slug={slug}
+  pageTitle={pageTitle}
+  heroTitle={heroTitle}
+>
+
+  {slug === 'incio' && (
+    <section >
+      <h2>Inicio Section</h2>
+    </section>
+  )}
+
+
+</PageLayout>
