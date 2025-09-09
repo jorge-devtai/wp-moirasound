@@ -6,6 +6,9 @@ const apiUrl: string = `${domain}/wp-json/wp/v2`;
 const endpoints: Endpoints = {
   posts: `${apiUrl}/posts`,
   pages: `${apiUrl}/pages`,
+  artists: `${apiUrl}/artista`,
+  events: `${apiUrl}/evento`,
+  gallerys: `${apiUrl}/gallery`,
   media: `${apiUrl}/media`,
   categories: `${apiUrl}/categories`,
   tags: `${apiUrl}/tags`,

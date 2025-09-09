@@ -1,9 +1,24 @@
 ---
 import Button from "@components/Button.astro";
 import CardEvent from "@components/CardEvent.astro";
-import { getEventInfo } from "@libs/wp";
+import { getEventInfo } from "@libs/apiEvents.ts";
+import { getInfoPage } from "@libs/apiPages";
 
-const events = await getEventInfo({ perPage: 3 });
+const events = await getEventInfo({ perPage: 3});
+
+const { pageSlug, eventsTitle, eventsSubtitle, eventButton } = Astro.props;
+
+const { eventsBlock } = await getInfoPage(pageSlug);
+
+
+
+const byId = new Map(events.map((eventItem) => [eventItem.eventId, eventItem]));
+console.log("Esto los ids de bloque de evenntos" ,byId);
+const eventsToShow = eventsBlock
+   .map((id: number) => byId.get(id))
+   .filter(Boolean);
+
+
 ---
 
 <artice>
@@ -14,14 +29,18 @@ const events = await getEventInfo({ perPage: 3 });
             grid-gap="32px"
             min-container-grid="280px"
         >
-            <h2>Próximos Eventos</h2>
-            <h3>Encuentra nuestros lanzamientos o jam sessions</h3>
-            <span class="btn-wrap">
-                <Button
-                    buttonText="Todos los eventos"
-                    variant="primary"
-                    size="large"
-                />
+            <h2>{eventsTitle}</h2>
+            <h3>{eventsSubtitle}</h3>
+            <span class="btn-wrap">          
+                {eventButton && (
+                    <Button
+                        buttonText={eventButton.buttonText}
+                        href={eventButton.href}
+                        target={eventButton.target}
+                        variant="primary"
+                        size="large"
+                    />
+                )}
             </span>
         </header>
         <div
@@ -31,16 +50,16 @@ const events = await getEventInfo({ perPage: 3 });
             min-container-grid="200px"
         >
             {
-                events.map((event) => (
+                eventsToShow.map((event:any) => (
                     <CardEvent
-                        eventName={event.eventName}
-                        eventDate={event.eventDate}
-                        eventAddress={event.eventAddress}
-                        eventTime={event.eventTime}
-                        artistName={event.artistName}
+                        eventName={event.eventAcf.eventName}
+                        eventDate={event.eventAcf.eventDate}
+                        eventAddress={event.eventAcf.eventAddress}
+                        eventTime={event.eventAcf.eventTime}
+                        artistName={event.eventAcf.eventArtist}
                         featuredImageEvent={event.featuredImageEvent}
-                        titleEvent={event.titleEvent}
-                        eventType={event.eventType}
+                        titleEvent={event.eventAcf.eventArtist}
+                        eventType={event.eventTypes}
                     />
                 ))
             }
@@ -67,7 +86,7 @@ const events = await getEventInfo({ perPage: 3 });
             }
 
             @media (width < 1110px) {
-               header > .btn-wrap {
+                header > .btn-wrap {
                     justify-content: start;
                 }
             }

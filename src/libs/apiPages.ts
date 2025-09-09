@@ -30,7 +30,6 @@ export async function getInfoPage(slug: string) {
                     hero_section_description: heroDescription,
                     feature_section_title: featureTitle,
                     feature_section_description: featureDescription,
-                    //feature_section_image: [featureImage] = [],
                     team_section_title: teamTitle,
                     team_section_description: teamDescription,
                     team_block: teamBlock,

@@ -1,11 +1,22 @@
 ---
 import Button from "@components/Button.astro";
 import CardArtist from "@components/CardArtist.astro";
-import { getArtistInfo } from "@libs/wp.ts";
+import { getArtistInfo } from "@libs/apiArtists.ts";
+import { getInfoPage } from "@libs/apiPages";
 
 const artists = await getArtistInfo({ perPage: 3 });
 
-const { artistsTitle, artistButton } = Astro.props;
+const { pageSlug, artistsTitle, artistButton } = Astro.props;
+
+const { artistsBlock } = await getInfoPage(pageSlug);
+
+const byId = new Map(artists.map((artist) => [artist.artistId, artist]));
+
+const artistsToShow = artistsBlock
+  .map((id: number) => byId.get(id))
+  .filter(Boolean);
+
+
 ---
 
 <section>
@@ -17,26 +28,27 @@ const { artistsTitle, artistButton } = Astro.props;
   >
     <h2>{artistsTitle}</h2>
     <span>
-      {artistButton && (
-        <Button
-          buttonText={artistButton.buttonText}
-          href={artistButton.href}
-          target={artistButton.target}
-          variant="primary"
-          size="large"
-        />
-      )
+      {
+        artistButton && (
+          <Button
+            buttonText={artistButton.buttonText}
+            href={artistButton.href}
+            target={artistButton.target}
+            variant="primary"
+            size="large"
+          />
+        )
       }
     </span>
   </div>
   <fieldset>
     {
-      artists.map((artist) => (
+      artistsToShow.map((artist: any) => (
         <CardArtist
-          artistName={artist.artistName}
-          artistDescription={artist.artistDescription}
+          artistName={artist.artistAcf.artistName}
+          artistDescription={artist.artistAcf.artistBiography}
           featuredImage={artist.featuredImage}
-          styleName={artist.styleName}
+          styleName={artist.genres?.join(", ") ?? ""}
           country={artist.country}
         />
       ))

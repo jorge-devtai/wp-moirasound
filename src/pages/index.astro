@@ -3,12 +3,10 @@ import PageLayout from '@layouts/PageLayout.astro';
 import Mision from '@sections/home/Mision.astro';
 import BentoGallery from '@sections/home/BentoGallery.astro';
 import FeaturedArtists from '@sections/home/FeaturedArtists.astro';
-import Hero from '@sections/home/Hero.astro';
 import LatestNewsReleases from '@sections/home/LatestNews&Releases.astro';
 
 import UpcomingEvents from '@sections/home/UpcomingEvents.astro';
 import Team from '@sections/home/Team.astro';
-
 
 import { getInfoPage } from '@libs/apiPages.ts';
 
@@ -21,7 +19,6 @@ const {
 	featureTitle, 
 	featureDescription,
 	featureButton, 
-	//featureImageUrl, 
 	teamTitle, 
 	teamDescription,
 	teamButton,
@@ -37,8 +34,6 @@ const {
 } = await getInfoPage('inicio')
 
 
-
-
 ---
 <PageLayout
   slug={pageSlug}
@@ -52,10 +47,12 @@ const {
 	featureButton={featureButton}
 />
 <FeaturedArtists 
+	pageSlug="inicio"
 	artistsTitle={artistsTitle}
 	artistButton={artistButton}
 />
 <UpcomingEvents 
+	pageSlug="inicio"
 	eventsTitle={eventsTitle}
 	eventsSubtitle={eventsSubtitle}
 	eventButton={eventButton}
