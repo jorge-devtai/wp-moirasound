@@ -80,6 +80,14 @@ export interface newsProps {
   newsCategories?: number[];
 }
 
+export interface StaffProps {
+  staffId?: number;
+  staffSlug?: string;
+  staffName?: string;
+  staffRole?: string;
+  staffPhoto?: string;
+}
+
 export interface RawButton {
   title?: string;
   url?: string;

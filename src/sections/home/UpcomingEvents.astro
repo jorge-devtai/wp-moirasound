@@ -11,7 +11,6 @@ const { pageSlug, eventsTitle, eventsSubtitle, eventButton } = Astro.props;
 const { eventsBlock } = await getInfoPage(pageSlug);
 
 const byId = new Map(events.map((eventItem) => [eventItem.eventId, eventItem]));
-console.log("Esto los ids de bloque de eventos" ,byId);
 
 const eventsToShow = eventsBlock
    .map((id: number) => byId.get(id))

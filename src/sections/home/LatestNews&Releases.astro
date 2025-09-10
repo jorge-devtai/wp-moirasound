@@ -11,7 +11,6 @@ const { pageSlug, newsTitle, newsButton } = Astro.props;
 const { newsBlock } = await getInfoPage(pageSlug);
 
 const byId = new Map(news.map((newItem) => [newItem.newsId, newItem]));
-console.log("Esto los ids de bloque de NOTICIAS Y ENTREVISTAS" ,byId);
 
 const newsToShow = newsBlock
    .map((id: number) => byId.get(id))
