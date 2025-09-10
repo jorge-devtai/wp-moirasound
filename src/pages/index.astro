@@ -10,6 +10,8 @@ import Team from '@sections/home/Team.astro';
 
 import { getInfoPage } from '@libs/apiPages.ts';
 
+const pageSlugIndex = 'inicio';
+
 const { 
 	pageSlug, 
 	pageTitle, 
@@ -31,7 +33,7 @@ const {
 	newsTitle,
 	newsSubtitle,
 	newsButton,
-} = await getInfoPage('inicio')
+} = await getInfoPage(pageSlugIndex);
 
 
 ---
@@ -47,23 +49,25 @@ const {
 	featureButton={featureButton}
 />
 <FeaturedArtists 
-	pageSlug="inicio"
+	pageSlug={pageSlugIndex}
 	artistsTitle={artistsTitle}
 	artistButton={artistButton}
 />
 <UpcomingEvents 
-	pageSlug="inicio"
+	pageSlug={pageSlugIndex}
 	eventsTitle={eventsTitle}
 	eventsSubtitle={eventsSubtitle}
 	eventButton={eventButton}
 />
-<LatestNewsReleases 
+<LatestNewsReleases
+	pageSlug={pageSlugIndex}
 	newsTitle={newsTitle}
 	newsSubtitle={newsSubtitle}
 	newsButton={newsButton}
 />
 <BentoGallery />
 <Team 
+	pageSlug={pageSlugIndex}
 	teamTitle={teamTitle}
 	teamDescription={teamDescription}
 	teamButton={teamButton}

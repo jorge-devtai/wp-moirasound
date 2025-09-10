@@ -4,6 +4,7 @@ export interface Endpoints {
   pages: string;
   media: string;
   categories: string;
+  news: string;
   tags: string;
   artists: string;
   events: string; 
@@ -67,6 +68,16 @@ export interface EventAcfProps {
   eventTime?: string;
   eventArtist?: number[];
   eventType?: string[];
+}
+
+export interface newsProps {
+  newsId: number;
+  newsSlug: string;
+  newsTitle: string;
+  newsExcerpt: string;
+  newsContent: string;
+  featuredImageNews?: string;
+  newsCategories?: number[];
 }
 
 export interface RawButton {

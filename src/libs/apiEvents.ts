@@ -11,7 +11,7 @@ export async function getAllSlugEvents(): Promise<EventProps[]> {
 
         const eventsSlug = data.map((eventSlug) => eventSlug.slug)
 
-        console.log("Estos son los slugs de los eventos:", eventsSlug);
+        //console.log("Estos son los slugs de los eventos:", eventsSlug);
         return eventsSlug;
 
     } catch (error) {
@@ -23,7 +23,7 @@ export async function getAllSlugEvents(): Promise<EventProps[]> {
 
 export async function getEventInfo({ perPage = 100 }: { perPage?: number } = {}): Promise<EventProps[]> {
     try {
-        const reponse = await fetch(`${endpoints.events}?per_page=${perPage}&_embed=wp:featuredmedia,wp:term,acf:term&_fields=id,slug,title,excerpt,acf,_links`);
+        const reponse = await fetch(`${endpoints.events}?per_page=${perPage}&_embed=wp:featuredmedia,wp:term,acf:term,acf:post&_fields=id,slug,title,excerpt,acf,_links`);
         if (!reponse.ok) throw new Error(`HTTP error! status: ${reponse.status}`);
 
         const data = await reponse.json();
@@ -41,7 +41,6 @@ export async function getEventInfo({ perPage = 100 }: { perPage?: number } = {})
                     event_date: eventDate,
                     event_time: eventTime,
                     event_artist: eventArtist,
-                    event_type: eventType,
                 } = {},
                 _embedded: {
                     'wp:featuredmedia': featureMedia = [],
@@ -52,7 +51,9 @@ export async function getEventInfo({ perPage = 100 }: { perPage?: number } = {})
 
             const featuredImageEvent = featureMedia?.[0]?.source_url ?? '';
             const eventTypes = termsEvents?.[0]?.name || '';
-            const artistName = artistData?.[0]?.artist_name || '';
+            const artistName = artistData
+                ?.filter((artist: any) => eventArtist?.includes(artist.id))
+                ?.map((a: any) => a.acf.artist_name) || [];
 
             return {
                 eventId,
@@ -67,14 +68,12 @@ export async function getEventInfo({ perPage = 100 }: { perPage?: number } = {})
                     eventAddress,
                     eventDate,
                     eventTime,
-                    eventArtist,
-                    eventType,
                 },
                
             };
         });
 
-        console.log("Información de los eventos:", eventsInfo);
+       // console.log("Información de los eventos desde la api:", eventsInfo);
         return eventsInfo;
 
     } catch (error) {

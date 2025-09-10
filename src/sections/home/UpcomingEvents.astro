@@ -10,10 +10,9 @@ const { pageSlug, eventsTitle, eventsSubtitle, eventButton } = Astro.props;
 
 const { eventsBlock } = await getInfoPage(pageSlug);
 
-
-
 const byId = new Map(events.map((eventItem) => [eventItem.eventId, eventItem]));
-console.log("Esto los ids de bloque de evenntos" ,byId);
+console.log("Esto los ids de bloque de eventos" ,byId);
+
 const eventsToShow = eventsBlock
    .map((id: number) => byId.get(id))
    .filter(Boolean);
@@ -56,9 +55,8 @@ const eventsToShow = eventsBlock
                         eventDate={event.eventAcf.eventDate}
                         eventAddress={event.eventAcf.eventAddress}
                         eventTime={event.eventAcf.eventTime}
-                        artistName={event.eventAcf.eventArtist}
+                        artistName={event.artistName.join(", ")}
                         featuredImageEvent={event.featuredImageEvent}
-                        titleEvent={event.eventAcf.eventArtist}
                         eventType={event.eventTypes}
                     />
                 ))

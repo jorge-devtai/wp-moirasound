@@ -1,6 +1,5 @@
 ---
 interface EventProps {
-    titleEvent?: string;
     eventName?: string;
     eventAddress?: string;
     eventDate?: string;
@@ -10,13 +9,13 @@ interface EventProps {
     eventType?: string;
 }
 
-const { titleEvent, eventName, eventAddress, eventDate, eventTime, artistName, featuredImageEvent, eventType}: EventProps = Astro.props
+const { eventName, eventAddress, eventDate, eventTime, artistName, featuredImageEvent, eventType}: EventProps = Astro.props
 const date = eventDate ? new Date(eventDate.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3')) : null;
 ---
 <div class="event-card" style=`--_imgEvent: url("${featuredImageEvent}")`>
     <div class="event-card__info-container">
         <h4>{eventName}</h4>
-        <p>{date?.toLocaleDateString()}</p>
+        <p>{date?.toLocaleDateString()} - {eventTime}</p>
         <p>{eventAddress}</p>
         <p>{artistName}</p>
         <span class="tag">{eventType}</span>

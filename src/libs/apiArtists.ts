@@ -11,7 +11,7 @@ export async function getAllSlugArtists(): Promise<ArtistProps[]> {
 
         const artistsSlug = data.map((artist) => artist.slug)
 
-        console.log("Estos son los slugs de los artistas:", artistsSlug);
+       // console.log("Estos son los slugs de los artistas:", artistsSlug);
         return artistsSlug;
 
     } catch (error) {
@@ -70,7 +70,7 @@ export async function getArtistInfo({ perPage = 100}: { perPage?: number } = {})
             }
         })
 
-        console.log("Estos son los datos de los artistas:", artistsInfo);
+       // console.log("Estos son los datos de los artistas desde la api:", artistsInfo);
         return artistsInfo;
 
     } catch (error) {

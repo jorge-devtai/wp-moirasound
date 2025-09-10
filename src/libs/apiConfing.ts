@@ -8,6 +8,7 @@ const endpoints: Endpoints = {
   pages: `${apiUrl}/pages`,
   artists: `${apiUrl}/artista`,
   events: `${apiUrl}/evento`,
+  news: `${apiUrl}/posts`,
   gallerys: `${apiUrl}/gallery`,
   media: `${apiUrl}/media`,
   categories: `${apiUrl}/categories`,

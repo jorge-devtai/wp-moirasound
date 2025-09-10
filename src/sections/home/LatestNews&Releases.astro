@@ -1,13 +1,23 @@
 ---
 import Button from "@components/Button.astro";
 import CardNews from "@components/CardNews.astro";
-import { getPostsInfo } from "@libs/wp";
+import { getNewsInfo } from "@libs/apiPosts.ts";
+import { getInfoPage } from "@libs/apiPages.ts";
 
-const buttons = [{ label: "Todas las noticias", type: "secondary", href: "#" }];
+const news = await getNewsInfo({ perPage: 3 });
 
-const posts = await getPostsInfo({ perPage: 3 });
+const { pageSlug, newsTitle, newsButton } = Astro.props;
 
-const { newsTitle, newsButton } = Astro.props;
+const { newsBlock } = await getInfoPage(pageSlug);
+
+const byId = new Map(news.map((newItem) => [newItem.newsId, newItem]));
+console.log("Esto los ids de bloque de NOTICIAS Y ENTREVISTAS" ,byId);
+
+const newsToShow = newsBlock
+   .map((id: number) => byId.get(id))
+   .filter(Boolean);
+
+
 ---
 
 <section>
@@ -33,13 +43,13 @@ const { newsTitle, newsButton } = Astro.props;
 
         <div layout-container>
             {
-                posts.map((post: any) => (
+                newsToShow.map((post: any) => (
                     <CardNews
-                        titlePost={post.titlePost}
-                        excerptPost={post.excerptPost}
-                        datePost={post.datePost}
-                        featuredImagePost={post.featuredImagePost}
-                        postType={post.postType}
+                        titlePost={post.newsTitle}
+                        excerptPost={post.newsExcerpt}
+                        datePost={post.newsDate}
+                        featuredImagePost={post.featuredImageNews}
+                        postType={post.newsCategories}
                     />
                 ))
             }
