@@ -11,7 +11,7 @@ const { slug } = Astro.params
 const pageData = await getInfoPage(slug)
 if (!pageData) return Astro.redirect('/404')
 
-const { pageTitle, heroTitle, heroDescription } = pageData
+const { pageTitle, heroTitle, heroDescription, heroButton } = pageData
 
 console.log(pageData)
 
@@ -19,14 +19,16 @@ console.log(pageData)
 
 ---
 <PageLayout
-  slug={slug}
+  pageSlug={slug}
   pageTitle={pageTitle}
   heroTitle={heroTitle}
+  heroDescription={heroDescription}
+  heroButton={heroButton}
 >
 
-  {slug === 'incio' && (
+  {slug === 'mision' && (
     <section >
-      <h2>Inicio Section</h2>
+      <h2>Mision Section</h2>
     </section>
   )}
 

@@ -128,6 +128,7 @@ export async function getAllSlugsPages() {
         const slugsPages = data.map((page: { slug: string }) => page.slug);
 
         return slugsPages;
+        
     } catch (error) {
         console.error("Error fetching all slugs pages:", error);
         throw error;
